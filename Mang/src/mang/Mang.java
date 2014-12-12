@@ -15,7 +15,9 @@ public class Mang {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+//        ex1.mainex1();
+        ex3.main(args);
+        ex2.EX2(args);
     }
     
 }
