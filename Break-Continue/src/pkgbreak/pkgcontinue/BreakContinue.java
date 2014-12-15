@@ -5,6 +5,9 @@
  */
 package pkgbreak.pkgcontinue;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 /**
@@ -19,30 +22,48 @@ public class BreakContinue {
      * kiếm chính xác tên sinh viên vừa nhập và in ra màn hình số thứ tự của
      * sinh viên đó!
      */
+    String nameStudent;
+
     public static void main(String[] args) {
+        Cautraloi.main(args);
         int siso;
         String tencantim;
+
         Scanner scan = new Scanner(System.in);
+        ArrayList<BreakContinue> danhsach = new ArrayList();
         System.out.println("Nhập Sĩ Số lớp học: ");
         siso = scan.nextInt();
-        String[] nameStudent = new String[siso];
+
         for (int i = 0; i < siso; i++) {
+            scan.nextLine();
+            BreakContinue bK = new BreakContinue();
             System.out.println("Nhập họ tên sinh viên thứ" + (i + 1) + ":");
-            nameStudent[i] = scan.next();
+            bK.nameStudent = scan.next();
+            danhsach.add(bK);
+        }
+
+        Collections.sort(danhsach, new Comparator<BreakContinue>() {
+            @Override
+            public int compare(BreakContinue sv1, BreakContinue sv2) {
+                return (sv1.nameStudent.compareTo(sv2.nameStudent));
+            }
+        });
+        System.out.println("Danh sách sắp xếp theo alphabet là: ");
+        for (int i = 0; i < danhsach.size(); i++) {
+            System.out.println("Họ Tên Sinh Viên" + (i + 1) + ":" + danhsach.get(i).nameStudent);
         }
         System.out.println("Nhập tên cần tìm: ");
         tencantim = scan.next();
-        for (int i = 0; i < siso; i++) {
-            if (tencantim.equals(nameStudent[i])) {
-                System.out.println("Tên cần tìm là :" +tencantim +"Số thứ tự của Sinh Viên đó là: "+ (i+1));
-                
-            } else{
-                System.out.println("Không có tên sinh viên cần tìm");
-                break;
+        for (int i = 0; i < danhsach.size(); i++) {
+            if (tencantim.equals(danhsach.get(i).nameStudent)) {
+                System.out.println("Sinh viên cần tìm là : " + danhsach.get(i).nameStudent);
+              break;
+            } else {
+                System.out.println("Không có sinh viên cần tìm.");
+              continue; 
             }
- 
         }
-        
+
     }
 
 }
